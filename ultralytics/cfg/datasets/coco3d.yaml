@@ -1,0 +1,62 @@
+# Ultralytics COCO 3D Dataset Configuration
+# For RGB-D 3D object detection (4-channel input: RGB + Depth)
+# 
+# REQUIRED: All images must be 4-channel PNGs with depth in alpha channel
+# Depth values should be normalized 0-255 (0=near, 255=far)
+# 
+# Follows multimodal integration design pattern:
+# https://docs.ultralytics.com/guides/multimodal-perception/
+
+# Dataset root directory (absolute or relative to YOLOv8 root)
+path: ../datasets/coco3d
+
+# Train/val/test sets (relative to 'path')
+train: images/train  # Must contain 4-channel PNGs
+val: images/val      # Must contain 4-channel PNGs
+test: images/test     # Optional, for final evaluation
+
+# Class names
+names:
+  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: airplane
+  5: bus
+  6: train
+  7: truck
+  8: boat
+  9: traffic light
+  # ... (complete with all 80 COCO classes)
+
+# Number of classes
+nc: 80
+
+# ================================
+# VALIDATION CHECKS (DO NOT MODIFY)
+# ================================
+# These parameters ensure compatibility with 3D detection pipeline
+
+# Input channel verification (critical for train3D.py)
+channels: 4
+
+# Depth channel configuration
+# 0=R, 1=G, 2=B, 3=Depth (alpha channel)
+channel_order: [0, 1, 2, 3]
+
+# Depth normalization parameters
+# min_depth: 0.1  # meters (near plane)
+# max_depth: 100.0  # meters (far plane)
+# depth_scale: 255.0  # PNG value to meter conversion
+
+# ================================
+# USAGE INSTRUCTIONS
+# ================================
+# 1. Verify dataset structure:
+#    ls $path/images/train | head -n 3
+#    Should show: *.png (4-channel)
+# 
+# 2. Check channel count:
+#    python -c "from PIL import Image; \
+    print(Image.open('$path/images/train/000001.png').mode)"
+#    Should output: 'RGBA'
