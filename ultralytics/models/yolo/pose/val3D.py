@@ -1,17 +1,13 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 from ultralytics.models import yolo
-from ultralytics.utils import DEFAULT_CFG
 
 
 class Detection3DValidator(yolo.detect.DetectionValidator):
-    """
-    A class extending DetectionValidator for 3D object detection validation.
+    """A class extending DetectionValidator for 3D object detection validation.
 
-    This validator handles RGB-D input data and computes 3D-specific metrics
-    including depth accuracy, dimension estimation, and orientation error.
+    This validator handles RGB-D input data and computes 3D-specific metrics including depth accuracy, dimension
+    estimation, and orientation error.
 
     Attributes:
         loss_names (tuple): Names of 3D-specific loss components
