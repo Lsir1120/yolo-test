@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Iterable
-
 from ultralytics.models import yolo
-from ultralytics.utils import DEFAULT_CFG
 
 
 class Detection3DPredictor(yolo.detect.DetectionPredictor):
-    """
-    A class extending DetectionPredictor for 3D object detection prediction.
+    """A class extending DetectionPredictor for 3D object detection prediction.
 
-    This predictor handles RGB-D input data and decodes 3D bounding box parameters
-    (x, y, z, width, height, length, rotation) from model outputs.
+    This predictor handles RGB-D input data and decodes 3D bounding box parameters (x, y, z, width, height, length,
+    rotation) from model outputs.
 
     Attributes:
         args (dict): Configuration with 'task' set to 'detect3d'
@@ -42,10 +37,10 @@ class Detection3DPredictor(yolo.detect.DetectionPredictor):
         # 3. Converting rotation parameters to Euler angles
         # 4. Transforming to camera coordinate system
         # Placeholder for actual 3D box decoding logic
-        
+
         # Standard 2D detection postprocessing
         preds = super().postprocess(preds, img, orig_imgs)
-        
+
         # Add 3D-specific postprocessing
         for i, pred in enumerate(preds):
             if len(pred):
