@@ -6,15 +6,14 @@ from typing import Any
 
 from ultralytics.models import yolo
 from ultralytics.nn.tasks import DetectionModel
-from ultralytics.utils import DEFAULT_CFG, LOGGER
+from ultralytics.utils import DEFAULT_CFG
 
 
 class Detection3DTrainer(yolo.detect.DetectionTrainer):
-    """
-    A class extending DetectionTrainer for 3D object detection using depth information.
+    """A class extending DetectionTrainer for 3D object detection using depth information.
 
-    This trainer handles RGB-D input data and outputs 3D bounding box parameters
-    (x, y, z, width, height, length, rotation).
+    This trainer handles RGB-D input data and outputs 3D bounding box parameters (x, y, z, width, height, length,
+    rotation).
 
     Attributes:
         args (dict): Configuration arguments with 'channels'=4 for RGB-D input
@@ -39,9 +38,7 @@ class Detection3DTrainer(yolo.detect.DetectionTrainer):
         verbose: bool = True,
     ) -> DetectionModel:
         """Get detection model with 4-channel input support."""
-        model = DetectionModel(
-            cfg, nc=self.data["nc"], ch=self.args.channels, verbose=verbose
-        )
+        model = DetectionModel(cfg, nc=self.data["nc"], ch=self.args.channels, verbose=verbose)
         if weights:
             model.load(weights)
         return model
